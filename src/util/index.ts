@@ -42,16 +42,16 @@ export async function sendMessagesWithDelay({
   client: Whatsapp;
   targetNumber: string;
 }): Promise<void> {
-  for (const [, msg] of messages.entries()) {
-    const dynamicDelay = msg.length * 1;
-    await new Promise((resolve) => setTimeout(resolve, dynamicDelay));
-    client
-      .sendText(targetNumber, msg.trimStart())
-      .then((result) => {
-        console.log('Mensagem enviada:', result.body);
-      })
-      .catch((erro) => {
-        console.error('Erro ao enviar mensagem:', erro);
-      });
-  }
+  // const fullMessage = messages.join(' ');
+  const dynamicDelay = messages.length * 1;
+  await new Promise((resolve) => setTimeout(resolve, dynamicDelay));
+  client
+    .sendText(targetNumber, messages.join(' '))
+    .then((result) => {
+      console.log('Mensagem enviada:', result.body);
+    })
+    .catch((erro) => {
+      console.error('Erro ao enviar mensagem:', erro);
+    });
 }
+
